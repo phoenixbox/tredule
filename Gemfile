@@ -13,6 +13,7 @@ gem 'pry'
 gem 'rake'
 gem 'redis', "~> 3.0.3"
 gem 'sqlite3'
+gem 'sorcery'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
