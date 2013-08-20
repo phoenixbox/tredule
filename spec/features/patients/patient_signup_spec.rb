@@ -1,26 +1,17 @@
 require 'spec_helper'
 
-feature 'guest visits the site' do
-	it 'can see the header copy' do
-		visit root_path
-		within(:css, 'header#banner'){
-			expect(page).to have_content('Tredule')
+feature 'guest signs up' do
+	it 'to become a patient' do
+		visit new_patient_path
+		within(:css, "form#new-patient-form") {
+			fill_in 'patient_first_name', :with => 'shane'
+			fill_in 'patient_second_name', :with => 'rogers'
+			fill_in 'patient_email', :with => 'shane@example.com'
+			fill_in 'patient_password', :with => 'secret'
+			fill_in 'patient_password_confirmation', :with => 'secret'
+			click_button 'Sign-Up!'
 		}
-	end
-
-	it 'can sign-up to be a patient', focus: true do
-		visit root_path
-		within(:css, 'div#patient-signup'){
-				expect(page).to have_link("Patient")
-				click_link("Patient")
-			}
-			expect(page).to have_css('form#new-patient-form')
-	end
-
-	xit "can sign-up to be a doctor" do
-		visit root_path
-		within(:css, 'div#doctor-signup'){
-			expect(page).to have_link("doctor")
-		}
+		save_and_open_page
+		expect(page).to have_content('Shane')
 	end
 end
