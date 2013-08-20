@@ -86,10 +86,40 @@ describe PatientsController do
 				expect(@patient.first_name).to eq('Simon')
 			end
 
-			it 'redirects to the patient show' do
+			it 'redirects to the updated patient' do
 				put :update, id: @patient, patient: FactoryGirl.attributes_for(:patient)
 				expect(response).to redirect_to(@patient)
 			end
+		end
+
+		context "invalid attributes" do
+			it "does not change the @patient attributes" do
+				put :update, id: @patient, patient: FactoryGirl.attributes_for(:invalid_patient)
+				@patient.reload
+				expect(@patient.first_name).to eq('Steve')
+			end
+
+			it 're-renders the edit template' do
+				put :update, id: @patient, patient: FactoryGirl.attributes_for(:invalid_patient)
+				expect(response).to render_template :edit
+			end
+		end
+	end
+
+	describe 'DELETE#destroy' do
+		before(:each) do
+			@patient = FactoryGirl.create(:patient)
+		end
+
+		it 'deletes the patient' do
+			expect{
+				delete :destroy, id: @patient
+			}.to change(Patient, :count).by(-1)
+		end
+
+		it "redirects to the root path" do
+			delete :destroy, id: @patient
+			expect(response).to redirect_to root_path
 		end
 	end
 end

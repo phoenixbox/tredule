@@ -28,4 +28,9 @@ class PatientsController < ApplicationController
 			render :edit
 		end
 	end
+
+	def destroy
+		@patient = Patient.find(params[:id]).destroy
+		redirect_to root_path, notice: "Patient account successfully deleted!"
+	end
 end
