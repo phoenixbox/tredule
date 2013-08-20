@@ -8,7 +8,7 @@ class PatientsController < ApplicationController
 		if @patient.save
 			redirect_to @patient, notice: "Patient account successfully created!"
 		else
-			render :new
+			render :new, flash: "Patient account not created"
 		end
 	end
 

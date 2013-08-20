@@ -11,6 +11,10 @@ class Patient < ActiveRecord::Base
 									:password,
 									:password_confirmation
 
+	validates_presence_of :first_name, :second_name
+	validates :email, presence: :true, uniqueness: :true,
+	          format: { with: /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/ }
+
 	has_secure_password
 
 	before_validation :capitalize_name

@@ -11,7 +11,6 @@ feature 'guest signs up' do
 			fill_in 'patient_password_confirmation', :with => 'secret'
 			click_button 'Sign-Up!'
 		}
-		save_and_open_page
 		expect(page).to have_content('Shane')
 	end
 end
