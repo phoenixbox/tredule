@@ -239,6 +239,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-postgres-hstore
+  bcrypt-ruby
   better_errors
   binding_of_caller
   cane
