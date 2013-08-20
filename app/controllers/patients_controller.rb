@@ -19,4 +19,13 @@ class PatientsController < ApplicationController
 	def edit
 		@patient = Patient.find(params[:id])
 	end
+
+	def update
+		@patient = Patient.find(params[:id])
+		if @patient.update_attributes(params[:patient])
+			redirect_to @patient
+		else
+			render :edit
+		end
+	end
 end

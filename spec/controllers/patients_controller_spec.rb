@@ -61,6 +61,35 @@ describe PatientsController do
 					post :create, patient: FactoryGirl.attributes_for(:invalid_patient)
 				}.to_not change(Patient, :count).by(1)
 			end
+
+			it 're-renders the create template' do
+				post :create, patient: FactoryGirl.attributes_for(:invalid_patient)
+				expect(response).to render_template(:new)
+			end
+		end
+	end
+
+	describe 'PUT#update' do
+		before(:each) do
+			@patient = FactoryGirl.create(:patient, first_name: 'Steve')
+		end
+
+		it 'locates the requested @patient' do
+			put :update, id: @patient, patient: FactoryGirl.attributes_for(:patient)
+			expect(assigns(:patient)).to eq(@patient)
+		end
+
+		context "valid attributes" do
+			it 'changes @patient attributes in the database' do
+				put :update, id: @patient, patient: FactoryGirl.attributes_for(:patient, first_name: 'Simon')
+				@patient.reload
+				expect(@patient.first_name).to eq('Simon')
+			end
+
+			it 'redirects to the patient show' do
+				put :update, id: @patient, patient: FactoryGirl.attributes_for(:patient)
+				expect(response).to redirect_to(@patient)
+			end
 		end
 	end
 end
