@@ -56,6 +56,11 @@ describe PatientsController do
 		end
 
 		context 'with invalid attributes' do
+			it 'does not create a new patient in the database' do
+				expect{
+					post :create, patient: FactoryGirl.attributes_for(:invalid_patient)
+				}.to_not change(Patient, :count).by(1)
+			end
 		end
 	end
 end

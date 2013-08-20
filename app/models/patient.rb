@@ -12,4 +12,10 @@ class Patient < ActiveRecord::Base
 									:password_confirmation
 
 	has_secure_password
+
+	before_validation :capitalize_name
+
+	def capitalize_name
+		self.first_name.capitalize! && self.second_name.capitalize!
+	end
 end

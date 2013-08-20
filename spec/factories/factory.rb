@@ -9,6 +9,9 @@ FactoryGirl.define do
     policy_number '12345'
     medical_card_number ''
   	password 'secret'
+    factory :invalid_patient do
+      email "!bah*&#.com"
+    end
   end
 
   sequence :email do |n|
