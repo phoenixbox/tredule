@@ -4,3 +4,14 @@
 <div id="patient-signup">
 	<%= link_to "Patient", new_patient_path %>
 </div>
+<%= form_tag sessions_path, class: "login-form" do %>
+	<div class="field">
+		<%= label_tag :email %>
+		<%= text_field_tag :email %>
+	</div>
+	<div class="field">
+		<%= label_tag :password %>
+		<%= text_field_tag :password %>
+	</div>
+	<div class="actions"><%= submit_tag "Log-In!"%></div>
+<% end %>
