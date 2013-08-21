@@ -21,4 +21,12 @@ feature "patient can edit their profile" do
 	it "cant change its details with invalid attributes" do
 		edit_patient(patient, {email: '!#$%@!!.com'})
 	end
+
+	it "can destroy their account" do
+		log_in(patient)
+		visit edit_patient_path(patient)
+		expect(page).to have_link("Delete Account")
+		click_link("Delete Account")
+		# expect(current_path).to eq(root_path)
+	end
 end

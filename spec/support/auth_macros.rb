@@ -13,7 +13,6 @@ module AuthMacros
 	end
 
 	def edit_patient(user, attributes={})
-		binding.pry
 		log_in(user)
 		visit edit_patient_path(@_current_user)
 		fill_in :patient_first_name, :with => "Alex"
