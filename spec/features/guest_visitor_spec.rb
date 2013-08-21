@@ -8,6 +8,11 @@ feature 'guest visits the site' do
 		}
 	end
 
+	it "unauthorized cannot visit the patients path" do
+		visit root_path
+
+	end
+
 	it 'can sign-up to be a patient', focus: true do
 		visit root_path
 		within(:css, 'div#patient-signup'){
