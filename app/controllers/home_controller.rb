@@ -1,5 +1,9 @@
 class HomeController < ApplicationController
 	def index
-		@patient = Patient.new
+		if current_user
+			redirect_to patient_path(current_user)
+		else
+			@patient = Patient.new
+		end
 	end
 end

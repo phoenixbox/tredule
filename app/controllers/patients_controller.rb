@@ -6,6 +6,7 @@ class PatientsController < ApplicationController
 	def create
 		@patient = Patient.new(params[:patient])
 		if @patient.save
+			session[:user_id] = @patient
 			redirect_to @patient, notice: "Patient account successfully created!"
 		else
 			render :new, flash: "Patient account not created"
