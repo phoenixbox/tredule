@@ -1,4 +1,3 @@
-<% if current_user %>
-	Logged in as: <%= @patient.first_name %>
-	<%= link_to "Logout", session_path(@patient), method: 'delete'%>
-<% end %>
+Logged in as: <%= @patient.first_name %>
+<%= link_to "Logout", session_path(@patient), method: 'delete'%>
+<%= link_to "Edit Profile", edit_patient_path(@patient)%>

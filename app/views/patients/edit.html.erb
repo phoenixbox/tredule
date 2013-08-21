@@ -1,0 +1,40 @@
+<%= form_for @patient, html: {id: "edit-patient-form"} do |f| %>
+	<% if @patient.errors.any? %>
+		<div class="error_messages">
+			<h2>Sorry, you entered incorrect details:</h2>
+			<ul>
+				<% @patient.errors.full_messages.each do |message| %>
+				<li><%= message %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+	<%= f.label :first_name %>
+	<%= f.text_field :first_name %>
+	<br>
+	<%= f.label :second_name %>
+	<%= f.text_field :second_name %>
+	<br>
+	<%= f.label :email %>
+	<%= f.text_field :email %>
+	<br>
+	<%= f.label 'Date of Birth' %>
+	<%= f.text_field :dob %>
+	<br>
+	<%= f.label :insurance_provider%>
+	<%= f.text_field :insurance_provider %>
+	<br>
+	<%= f.label :policy_number %>
+	<%= f.text_field :policy_number %>
+	<br>
+	<%= f.label :medical_card_number %>
+	<%= f.text_field :medical_card_number %>
+	<br>
+	<%= f.label :password %>
+	<%= f.text_field :password %>
+	<br>
+	<%= f.label :password_confirmation %>
+	<%= f.text_field :password_confirmation %>
+	<br>
+	<%= f.submit 'Update Profile!' %>
+<% end %>

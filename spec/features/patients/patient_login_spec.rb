@@ -34,5 +34,6 @@ feature 'Patient visits the hompage' do
 	it 'unauthenticated cant see the logout link' do
 		visit patient_path(patient)
 		expect(page).to_not have_content(patient.first_name)
+		expect(current_path).to eq(root_path)
 	end
 end
