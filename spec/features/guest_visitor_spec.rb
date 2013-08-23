@@ -22,7 +22,7 @@ feature 'guest visits the site' do
 			expect(page).to have_css('form#new-patient-form')
 	end
 
-	xit "can sign-up to be a doctor" do
+	it "can sign-up to be a doctor" do
 		visit root_path
 		within(:css, 'div#doctor-signup'){
 			expect(page).to have_link("doctor")
