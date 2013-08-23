@@ -24,4 +24,12 @@ class DoctorsController < ApplicationController
 			render :edit, notice: "Update failed"
 		end
 	end
+	def destroy
+		doctor = Doctor.find(params[:id])
+		if doctor.delete
+			redirect_to root_path, notice: "Account deleted successfully"
+		else
+			redirect_to :back
+		end
+	end
 end

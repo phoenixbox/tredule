@@ -66,10 +66,6 @@ describe DoctorsController do
 		before(:each) do
 			@doctor = FactoryGirl.create(:doctor, first_name: 'drake')
 		end
-		it "locates the requested doctor" do
-			put :update, id: @doctor, doctor: FactoryGirl.attributes_for(:doctor)
-			expect(assigns(:doctor)).to eq(@doctor)
-		end
 		context "with valid attributes" do
 			it "updates the doctor" do
 				put :update, id: @doctor, doctor: {first_name: "andrew"}
@@ -83,6 +79,20 @@ describe DoctorsController do
 			end
 		end
 		context "with invalid attributes" do
+		end
+	end
+	describe "DELETE#destroy" do
+		before(:each) do
+			@doctor = FactoryGirl.create(:doctor)
+		end
+		it "deletes the doctor from the database" do
+			expect{
+				delete :destroy, id: @doctor
+				}.to change(Doctor, :count).by -1
+		end
+		it "redirects to the root_path" do
+			delete :destroy, id: @doctor
+			expect(response).to redirect_to root_path
 		end
 	end
 end
