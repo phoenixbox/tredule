@@ -25,4 +25,17 @@ describe DoctorsController do
 			expect(assigns(:doctor)).to eq(@doctor)
 		end
 	end
+	describe "GET#edit" do
+		before(:each) do
+			@doctor = FactoryGirl.create(:doctor)
+		end
+		it "renders the :edit template" do
+			get :edit, id: @doctor
+			expect(response).to render_template(:edit)
+		end
+		it "assigns the requested doctor to @doctor" do
+			get :edit, id: @doctor
+			expect(assigns(:doctor)).to eq(@doctor)
+		end
+	end
 end
