@@ -3,7 +3,7 @@ class Doctor < ActiveRecord::Base
   has_many :doctors_patients
   has_many :patients, :through => :doctors_patients
 
-  attr_accessible :email, :first_name, :second_name, :medical_school, :mobile, :password_digest, :speciality
+  attr_accessible :email, :first_name, :second_name, :medical_school, :mobile, :password, :speciality
 
 	# Validations
 	validates_presence_of :first_name, :second_name

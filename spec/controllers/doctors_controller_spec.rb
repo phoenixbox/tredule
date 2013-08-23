@@ -38,4 +38,28 @@ describe DoctorsController do
 			expect(assigns(:doctor)).to eq(@doctor)
 		end
 	end
+	describe "POST#create" do
+		context "with valid attributes" do
+			it "saves a Doctor to the db" do
+				expect{
+					post :create, doctor: FactoryGirl.attributes_for(:doctor)
+				}.to change(Doctor, :count).by 1
+			end
+			it "redirects to the Doctor show" do
+				post :create, doctor: FactoryGirl.attributes_for(:doctor)
+				expect(response).to redirect_to(doctor_path(Doctor.last))
+			end
+		end
+		context "with invalid attributes" do
+			it "does not save a Doctor to the db" do
+				expect{
+					post :create, doctor: FactoryGirl.attributes_for(:doctor, email: "")
+				}.to change(Doctor, :count).by 0
+			end
+			it "re-renders the edit template" do
+				post :create, doctor: FactoryGirl.attributes_for(:doctor, email: "")
+				expect(response).to render_template(:new)
+			end
+		end
+	end
 end
