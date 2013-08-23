@@ -25,7 +25,7 @@ feature 'guest visits the site' do
 	it "can sign-up to be a doctor" do
 		visit root_path
 		within(:css, 'div#doctor-signup'){
-			expect(page).to have_link("doctor")
+			expect(page).to have_link("Doctor")
 		}
 	end
 end
