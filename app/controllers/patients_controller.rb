@@ -33,7 +33,6 @@ class PatientsController < ApplicationController
 	end
 
 	def destroy
-		binding.pry
 		@patient = Patient.find(params[:id]).destroy
 		redirect_to root_path, notice: "Patient account successfully deleted!"
 	end
