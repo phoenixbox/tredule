@@ -8,8 +8,21 @@ FactoryGirl.define do
     insurance_provider 'VHI'
     policy_number '12345'
     medical_card_number ''
-  	password 'secret'
+    password 'secret'
     factory :invalid_patient do
+      email "!bah*&#.com"
+    end
+  end
+
+  factory :doctor do
+    first_name 'raphael'
+    second_name 'weiner'
+    mobile '01234567'
+    email
+  	password 'secret'
+    speciality 'orthopedics'
+    medical_school 'harvard'
+    factory :invalid_doctor do
       email "!bah*&#.com"
     end
   end

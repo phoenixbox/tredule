@@ -5,3 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+#   Mayor.create(name: 'Emanuel', city: cities.first)
+# puts "Seeding Database"
+patient = FactoryGirl.create(:patient, email: 'patient@patient.com')
+doctor = FactoryGirl.create(:doctor, email: 'doctor@doctor.com')

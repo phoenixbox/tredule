@@ -14,7 +14,7 @@ gem 'rake'
 gem 'redis', "~> 3.0.3"
 gem 'sqlite3'
 gem 'sorcery'
-gem 'bcrypt-ruby'
+gem 'bcrypt-ruby', '~> 3.0.0'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -27,7 +27,7 @@ group :development, :test do
   gem 'cane'
   gem 'capybara'
   gem 'debugger'
-  gem 'factory_girl_rails', "~> 4.0"
+  gem 'factory_girl_rails'
   gem 'launchy'
   gem 'mock_redis'
   gem 'rack_session_access'

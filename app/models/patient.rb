@@ -1,5 +1,8 @@
 class Patient < ActiveRecord::Base
 
+	has_many :doctors_patients
+	has_many :doctors, :through => :doctors_patients
+
 	attr_accessible :first_name,
 									:second_name,
 									:email,
