@@ -14,7 +14,15 @@ describe DoctorsController do
 	end
 	describe "GET#show" do
 		before(:each) do
-			doctor = FactoryGirl.create(:doctor)
+			@doctor = FactoryGirl.create(:doctor)
+		end
+		it "renders the show template" do
+			get :show, id: @doctor
+			expect(response).to render_template(:show)
+		end
+		it "assigns the requested doctor to @doctor" do
+			get :show, id: @doctor
+			expect(assigns(:doctor)).to eq(@doctor)
 		end
 	end
 end
