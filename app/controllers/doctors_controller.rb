@@ -16,4 +16,12 @@ class DoctorsController < ApplicationController
 			render :new, notice: "Doctor account not created, please try again"
 		end
 	end
+	def update
+		doctor = Doctor.find(params[:id])
+		if doctor.update_attributes(params[:doctor])
+			redirect_to doctor, notice: "Account updated!"
+		else
+			render :edit, notice: "Update failed"
+		end
+	end
 end

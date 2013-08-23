@@ -62,4 +62,27 @@ describe DoctorsController do
 			end
 		end
 	end
+	describe "PUT#update" do
+		before(:each) do
+			@doctor = FactoryGirl.create(:doctor, first_name: 'drake')
+		end
+		it "locates the requested doctor" do
+			put :update, id: @doctor, doctor: FactoryGirl.attributes_for(:doctor)
+			expect(assigns(:doctor)).to eq(@doctor)
+		end
+		context "with valid attributes" do
+			it "updates the doctor" do
+				put :update, id: @doctor, doctor: {first_name: "andrew"}
+				@doctor.reload
+				expect(@doctor.first_name).to eq "Andrew"
+			end
+			it "redirects to the doctor show" do
+				put :update, id: @doctor, doctor: {first_name: "john"}
+				@doctor.reload
+				expect(response).to redirect_to(@doctor)
+			end
+		end
+		context "with invalid attributes" do
+		end
+	end
 end

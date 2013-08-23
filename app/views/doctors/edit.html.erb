@@ -1,0 +1,6 @@
+<%= form_for @doctor, html: {id: "edit-doctor-form"} do |f| %>
+	<%= f.label :first_name %>
+	<%= f.text_field :first_name %>
+	<br>
+	<%= f.submit "Update!" %>
+<% end %>

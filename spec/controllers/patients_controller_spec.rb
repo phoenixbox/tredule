@@ -95,6 +95,7 @@ describe PatientsController do
 			it 'redirects to the updated patient' do
 				session[:user_id] = @patient.id
 				put :update, id: @patient, patient: FactoryGirl.attributes_for(:patient)
+				@patient.reload
 				expect(response).to redirect_to(@patient)
 			end
 		end
