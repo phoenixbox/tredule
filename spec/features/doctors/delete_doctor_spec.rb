@@ -5,6 +5,7 @@ feature 'delete Doctor account' do
 		@doctor = FactoryGirl.create(:doctor)
 	}
 	it ":Doctor can see the delete link and delete their account" do
+		log_in(@doctor)
 		visit edit_doctor_path(@doctor)
 		expect(page).to have_button("Delete Account")
 		click_button("Delete Account")

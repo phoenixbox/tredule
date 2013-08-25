@@ -13,6 +13,7 @@ feature 'Patient visits the hompage' do
 	it "logs-in through form" do
 		visit root_path
 		log_in(patient)
+		expect(page).to have_link("Logout")
 		expect(page).to have_content(patient.first_name)
 	end
 
@@ -20,6 +21,7 @@ feature 'Patient visits the hompage' do
 		visit root_path
 		log_in(patient)
 		visit root_path
+		expect(page).to have_link("Logout")
 		expect(page).to have_content(patient.first_name)
 	end
 
@@ -33,6 +35,7 @@ feature 'Patient visits the hompage' do
 
 	it 'unauthenticated cant see the logout link' do
 		visit patient_path(patient)
+		expect(page).to_not have_link("Logout")
 		expect(page).to_not have_content(patient.first_name)
 		expect(current_path).to eq(root_path)
 	end

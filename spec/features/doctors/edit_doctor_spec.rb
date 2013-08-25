@@ -6,6 +6,7 @@ feature 'Doctor edits their details' do
 		let(:doctor){FactoryGirl.create(:doctor)}
 
 		it "updates the doctor" do
+			log_in(doctor)
 			visit(doctor_path(doctor))
 			expect(page).to have_link("Profile")
 			click_link("Profile")

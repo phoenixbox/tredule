@@ -1,12 +1,20 @@
 class SessionsController < ApplicationController
 	def create
-		patient = Patient.find_by_email(params[:email])
-		if patient && patient.authenticate(params[:password])
-			session[:user_id] = patient.id
-			redirect_to patient_path(patient), notice: "Logged in successfully!"
+		user = find_patient(params) || find_doctor(params)
+		if user && user.authenticate(params[:password])
+			session[:user_id] = user.id
+			redirect_to user, notice: "Logged in successfully!"
 		else
-			redirect_to root_path, error: "Incorrect Information"
+		redirect_to root_path, error: "Incorrect Information"
 		end
+	end
+
+	def find_patient(params)
+		Patient.find_by_email(params[:email])
+	end
+
+	def find_doctor(params)
+		Doctor.find_by_email(params[:email])
 	end
 
 	def destroy

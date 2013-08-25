@@ -38,4 +38,4 @@
 	<br>
 	<%= f.submit 'Update Profile!' %>
 <% end %>
-<%= link_to "Delete Account", patient_path(@patient), :confirm => "Are you sure?", method: 'delete'%>
+<%= button_to "Delete Account", patient_path(@patient), :confirm => "Are you sure?", method: 'delete'%>

@@ -34,6 +34,7 @@ class PatientsController < ApplicationController
 
 	def destroy
 		@patient = Patient.find(params[:id]).destroy
+		logout_on_destroy
 		redirect_to root_path, notice: "Patient account successfully deleted!"
 	end
 end

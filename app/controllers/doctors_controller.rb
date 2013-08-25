@@ -1,4 +1,6 @@
 class DoctorsController < ApplicationController
+	before_filter :authorize, except: [:new, :create]
+
 	def new
 		@doctor = Doctor.new
 	end
@@ -25,11 +27,8 @@ class DoctorsController < ApplicationController
 		end
 	end
 	def destroy
-		doctor = Doctor.find(params[:id])
-		if doctor.delete
-			redirect_to root_path, notice: "Account deleted successfully"
-		else
-			redirect_to :back
-		end
+		doctor = Doctor.find(params[:id]).destroy
+		logout_on_destroy
+		redirect_to root_path, notice: "Doctor account successfully deleted!"
 	end
 end
