@@ -17,8 +17,14 @@ private
   	end
   end
 
+  def current_permission
+    @current_permission ||= Permission.new(current_user)
+  end
+
   def authorize
-  	redirect_to root_path, alert: "You are not authorized to visit this page" if current_user.nil?
+    if !current_permission.allow?(params[:controller], params[:action])
+      redirect_to root_path, alert: "You are not authorized to visit this page"
+    end
   end
 
   def logout_on_destroy
