@@ -6,14 +6,14 @@ private
   helper_method :current_user, :logout_on_destroy
 
   def current_user
-  	@current_user ||= find_user if session[:user_id]
+  	@current_user ||= find_user if session[:user_email]
   end
 
   def find_user
-  	if Patient.exists?(session[:user_id])
-  		Patient.find(session[:user_id])
+  	if Patient.exists?(email: session[:user_email])
+  		Patient.find_by_email(session[:user_email])
   	else
-  		Doctor.find(session[:user_id])
+  		Doctor.find_by_email(session[:user_email])
   	end
   end
 

@@ -16,14 +16,14 @@ describe PatientsController do
 	describe 'GET#show' do
 		it 'assigns the requested patient to @patient' do
 			patient = FactoryGirl.create(:patient)
-			session[:user_id] = patient.id
+			session[:user_email] = patient.email
 			get :show, id: patient
 			expect(assigns(:patient)).to eq(patient)
 		end
 
 		it "renders the show template" do
 			patient = FactoryGirl.create(:patient)
-			session[:user_id] = patient.id
+			session[:user_email] = patient.email
 			get :show, id: patient.id
 			expect(response).to render_template(:show)
 		end
@@ -32,14 +32,14 @@ describe PatientsController do
 	describe 'GET#edit' do
 		it "assigns the requested patient to @patient" do
 			patient = FactoryGirl.create(:patient)
-			session[:user_id] = patient.id
+			session[:user_email] = patient.email
 			get :edit, id: patient.id
 			expect(assigns(:patient)).to eq(patient)
 		end
 
 		it "renders the edit template" do
 			patient = FactoryGirl.create(:patient)
-			session[:user_id] = patient.id
+			session[:user_email] = patient.email
 			get :edit, id: patient
 			expect(response).to render_template(:edit)
 		end
@@ -79,21 +79,21 @@ describe PatientsController do
 		end
 
 		it 'locates the requested @patient' do
-			session[:user_id] = @patient.id
+			session[:user_email] = @patient.email
 			put :update, id: @patient, patient: FactoryGirl.attributes_for(:patient)
 			expect(assigns(:patient)).to eq(@patient)
 		end
 
 		context "valid attributes" do
 			it 'changes @patient attributes in the database' do
-				session[:user_id] = @patient.id
+				session[:user_email] = @patient.email
 				put :update, id: @patient, patient: FactoryGirl.attributes_for(:patient, first_name: 'Simon')
 				@patient.reload
 				expect(@patient.first_name).to eq('Simon')
 			end
 
 			it 'redirects to the updated patient' do
-				session[:user_id] = @patient.id
+				session[:user_email] = @patient.email
 				put :update, id: @patient, patient: FactoryGirl.attributes_for(:patient)
 				@patient.reload
 				expect(response).to redirect_to(@patient)
@@ -102,14 +102,14 @@ describe PatientsController do
 
 		context "invalid attributes" do
 			it "does not change the @patient attributes" do
-				session[:user_id] = @patient.id
+				session[:user_email] = @patient.email
 				put :update, id: @patient, patient: FactoryGirl.attributes_for(:invalid_patient)
 				@patient.reload
 				expect(@patient.first_name).to eq('Steve')
 			end
 
 			it 're-renders the edit template' do
-				session[:user_id] = @patient.id
+				session[:user_email] = @patient.email
 				put :update, id: @patient, patient: FactoryGirl.attributes_for(:invalid_patient)
 				expect(response).to render_template :edit
 			end
@@ -119,7 +119,7 @@ describe PatientsController do
 	describe 'DELETE#destroy' do
 		before(:each) do
 			@patient = FactoryGirl.create(:patient)
-			session[:user_id] = @patient.id
+			session[:user_email] = @patient.email
 		end
 
 		it 'deletes the patient' do

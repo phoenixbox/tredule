@@ -15,7 +15,7 @@ describe DoctorsController do
 	describe "GET#show" do
 		before(:each) do
 			@doctor = FactoryGirl.create(:doctor)
-			session[:user_id] = @doctor.id
+			session[:user_email] = @doctor.email
 		end
 		it "renders the show template" do
 			get :show, id: @doctor
@@ -29,7 +29,7 @@ describe DoctorsController do
 	describe "GET#edit" do
 		before(:each) do
 			@doctor = FactoryGirl.create(:doctor)
-			session[:user_id] = @doctor.id
+			session[:user_email] = @doctor.email
 		end
 		it "renders the :edit template" do
 			get :edit, id: @doctor
@@ -67,7 +67,7 @@ describe DoctorsController do
 	describe "PUT#update" do
 		before(:each) do
 			@doctor = FactoryGirl.create(:doctor, first_name: 'drake')
-			session[:user_id] = @doctor.id
+			session[:user_email] = @doctor.email
 		end
 		context "with valid attributes" do
 			it "updates the doctor" do
@@ -88,7 +88,7 @@ describe DoctorsController do
 	describe "DELETE#destroy" do
 		before(:each) do
 			@doctor = FactoryGirl.create(:doctor)
-			session[:user_id] = @doctor.id
+			session[:user_email] = @doctor.email
 		end
 		it "deletes the doctor from the database" do
 			expect{
