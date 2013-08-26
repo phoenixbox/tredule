@@ -1,6 +1,4 @@
 class DoctorsController < ApplicationController
-	before_filter :authorize, except: [:new, :create]
-
 	def new
 		@doctor = Doctor.new
 	end
