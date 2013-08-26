@@ -32,37 +32,81 @@ describe Permission do
 		end
 
 		it "authorize doctors [new create]" do
-			authorize('doctors','new')
-			authorize('doctors','create')
+			should authorize('doctors','new')
+			should authorize('doctors','create')
 		end
 
 		it "not authorize doctors [show edit update destroy]" do
-			authorize('doctors','show')
-			authorize('doctors','edit')
-			authorize('doctors','update')
-			authorize('doctors','destroy')
+			should_not authorize('doctors','show')
+			should_not authorize('doctors','edit')
+			should_not authorize('doctors','update')
+			should_not authorize('doctors','destroy')
 		end
 	end
 
-	# describe "as a patient" do
-		# let(:patient){FactoryGirl.create(:patient)}
-		# log_in(patient)
-		# subject{ Permission.new(patient)}
+	describe "as a patient" do
+		patient = FactoryGirl.build(:patient)
+		subject{ Permission.new(patient)}
 
-		# it { should_not authorize("patients", "index") }
-	# 	it 'authorize home [index]' do
-	# 		expect(authorize("home","index")).to be_true
-	# 	end
-	# 	it 'authorize patient [new create show edit update destroy]' do
-	# 		expect(authorize("patient","new")).to be_true
-	# 		expect(authorize("patient","create")).to be_true
-	# 		expect(authorize("patient","show")).to be_true
-	# 		expect(authorize("patient","edit")).to be_true
-	# 		expect(authorize("patient","update")).to be_true
-	# 		expect(authorize("patient","destroy")).to be_true
-	# 	end
-	# 	it "not authorize patient [index]" do
-	# 		expect(authorize("patient", "index")).to
-	# 	end
-	# end
+		it 'authorize home [index]' do
+			should authorize("home","index")
+		end
+
+		it 'authorize patients [show edit update destroy]' do
+			should authorize("patients","show")
+			should authorize("patients","edit")
+			should authorize("patients","update")
+			should authorize("patients","destroy")
+		end
+
+		it "not authorize patients [index new create]" do
+			should_not authorize("patients","create")
+			should_not authorize("patients","new")
+			should_not authorize("patients", "index")
+		end
+
+		it "authorize sessions [create destroy]" do
+			should authorize("sessions", "create")
+			should authorize("sessions", "destroy")
+		end
+
+		it "not authorize doctors [index show new create update destroy]" do
+			should_not authorize("doctors", "index")
+			should_not authorize("doctors", "show")
+			should_not authorize("doctors", "new")
+			should_not authorize("doctors", "create")
+			should_not authorize("doctors", "update")
+			should_not authorize("doctors", "destroy")
+		end
+	end
+
+	describe "as a doctor" do
+		doctor = FactoryGirl.build(:doctor)
+		subject{ Permission.new(doctor) }
+
+		it "authorize home [index]" do
+			should authorize("home","index")
+		end
+
+		it "authorize doctors [show edit update destroy]" do
+			should authorize("doctors", "show")
+			should authorize("doctors", "edit")
+			should authorize("doctors", "update")
+			should authorize("doctors", "destroy")
+		end
+		it "not authorize doctors [index new create]" do
+			should_not authorize("doctors", "index")
+			should_not authorize("doctors", "new")
+			should_not authorize("doctors", "create")
+		end
+		it "not authorize patients [index show new create edit update destroy]" do
+			should_not authorize("patients","index")
+			should_not authorize("patients","show")
+			should_not authorize("patients","new")
+			should_not authorize("patients","create")
+			should_not authorize("patients","edit")
+			should_not authorize("patients","update")
+			should_not authorize("patients","destroy")
+		end
+	end
 end
