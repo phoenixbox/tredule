@@ -1,9 +1,12 @@
 Railsplate::Application.routes.draw do
+  get "password_resets/new"
+
   root to: 'home#index'
 
   resources :patients
   resources :doctors
   resources :sessions
+  resources :password_resets
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

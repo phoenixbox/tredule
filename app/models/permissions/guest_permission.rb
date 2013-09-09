@@ -5,6 +5,7 @@ module Permissions
 			allow :sessions, [:create, :destroy]
 			allow :patients, [:new, :create]
 			allow :doctors, [:new, :create]
+			allow :password_resets, [:new]
 		end
 	end
 end

@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :patient do
     first_name 'shane'
   	second_name 'rogers'
-  	email
+  	email "patient@example.com"
 	  mobile '01234567'
     dob '01/01/1980'
     insurance_provider 'VHI'
@@ -18,16 +18,12 @@ FactoryGirl.define do
     first_name 'raphael'
     second_name 'weiner'
     mobile '01234567'
-    email
+    email "doctor@example.com"
   	password 'secret'
     speciality 'orthopedics'
     medical_school 'harvard'
     factory :invalid_doctor do
       email "!bah*&#.com"
     end
-  end
-
-  sequence :email do |n|
-    "unique_email#{n}@example.com"
   end
 end

@@ -2,8 +2,11 @@ require 'spec_helper'
 
 describe Patient do
 	subject do
-		FactoryGirl.create(:patient)
+		FactoryGirl.create(:patient, email: "uniqueemail1@email.com" )
 	end
+
+	it { should have_db_column(:email) }
+	it { should have_many(:doctors).through(:doctors_patients)}
 
 	it 'subject should be valid' do
 		expect(subject).to be_valid
