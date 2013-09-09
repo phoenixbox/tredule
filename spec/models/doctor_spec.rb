@@ -10,6 +10,9 @@ describe Doctor do
   end
 
   it { should have_many(:patients).through(:doctors_patients) }
+  it { should have_db_column(:password_reset_token) }
+  it { should have_db_column(:password_reset_at) }
+  it { should allow_mass_assignment_of(:password_reset_token) }
 
   it "invalid attributes is not valid" do
   	subject.email = ""

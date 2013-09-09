@@ -27,6 +27,8 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
   config.include AuthMacros
+  config.include MailerMacros
+  config.before(:each){ reset_email }
 end
 
 Capybara.server_port = 1234

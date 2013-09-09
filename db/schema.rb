@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130823132349) do
+ActiveRecord::Schema.define(:version => 20130909170527) do
 
   create_table "doctors", :force => true do |t|
     t.string   "first_name"
@@ -21,8 +21,10 @@ ActiveRecord::Schema.define(:version => 20130823132349) do
     t.string   "password_digest"
     t.string   "speciality"
     t.string   "medical_school"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+    t.string   "password_reset_token"
+    t.datetime "password_reset_at"
   end
 
   create_table "doctors_patients", :force => true do |t|

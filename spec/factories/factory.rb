@@ -22,6 +22,8 @@ FactoryGirl.define do
   	password 'secret'
     speciality 'orthopedics'
     medical_school 'harvard'
+    password_reset_token ''
+    password_reset_at ""
     factory :invalid_doctor do
       email "!bah*&#.com"
     end

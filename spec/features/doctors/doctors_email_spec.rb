@@ -11,5 +11,7 @@ feature "doctor emails on" do
 		click_link "Forgot Password?"
 		fill_in "Email", :with => doctor.email
 		click_button "Send Reset Password Email"
+		expect(page).to have_content("Email Sent!")
+		expect(last_email.body).to have_content("Password Reset Request")
 	end
 end
