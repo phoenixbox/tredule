@@ -6,7 +6,7 @@ describe Doctor do
 	end
   it "delivers email to doctor" do
     subject.send_password_reset
-    expect(last_email.body).to include(subject.email)
+    expect(last_email.body.encoded).to include("Password Reset Request")
   end
   it "generates a unique password reset token every time" do
   	subject.send_password_reset

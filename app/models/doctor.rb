@@ -27,7 +27,6 @@ class Doctor < ActiveRecord::Base
 	end
 
 	def send_password_reset
-		# pass in the relevant column we want to create a token for
 		generate_token(:password_reset_token)
 		self.password_reset_at = Time.zone.now
 		save!
@@ -39,17 +38,4 @@ class Doctor < ActiveRecord::Base
 	     self[column] = SecureRandom.urlsafe_base64
 	   end while Doctor.exists?(column => self[column])
 	 end
-
-	# def generate_token(column)
-	# 	doctor = Doctor.find(self.id)
-	# 	begin
-	# 		doctor[column] = SecureRandom.urlsafe_base64
-	# 		# self[column] = SecureRandom.urlsafe_base64
-	# 		doctor.save
-	# 	end while doctor_exists(doctor, column)
-	# end
-	# weird postgres error workaround
-	# def doctor_exists(doctor, column)
-	# 	Doctor.where(column => doctor[column]).count == 1
-	# end
 end
