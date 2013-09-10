@@ -9,18 +9,22 @@ class Doctor < ActiveRecord::Base
   								:medical_school,
   								:mobile,
   								:password,
+  								:password_confirmation,
   								:speciality,
+  								:auth_token,
   								:password_reset_token,
   								:password_reset_at
 
 	# Validations
-	validates_presence_of :first_name, :second_name
+	validates_presence_of :first_name, :second_name, :auth_token
 	validates :email, presence: :true, uniqueness: :true,
 	          format: { with: /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/ }
 
   has_secure_password
 
   before_validation :capitalize_name
+  before_validation { generate_token(:auth_token) }
+
 
   def capitalize_name
 		self.first_name.capitalize! && self.second_name.capitalize!
@@ -34,8 +38,8 @@ class Doctor < ActiveRecord::Base
 	end
 
 	def generate_token(column)
-	   begin
-	     self[column] = SecureRandom.urlsafe_base64
-	   end while Doctor.exists?(column => self[column])
-	 end
+		begin
+		 self[column] = SecureRandom.urlsafe_base64
+		end while Doctor.exists?(column => self[column])
+	end
 end

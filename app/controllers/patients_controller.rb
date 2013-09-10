@@ -5,8 +5,8 @@ class PatientsController < ApplicationController
 
 	def create
 		@patient = Patient.new(params[:patient])
+		# @patient.generate_token(:auth_token)
 		if @patient.save
-			session[:user_id] = @patient
 			session[:user_email] = @patient.email
 			redirect_to @patient, notice: "Patient account successfully created!"
 		else

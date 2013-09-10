@@ -6,6 +6,7 @@ describe Patient do
 	end
 
 	it { should have_db_column(:email) }
+	it { should have_db_column(:auth_token) }
 	it { should have_many(:doctors).through(:doctors_patients)}
 
 	it 'subject should be valid' do

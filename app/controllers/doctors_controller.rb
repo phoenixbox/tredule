@@ -11,7 +11,6 @@ class DoctorsController < ApplicationController
 	def create
 		doctor = Doctor.create(params[:doctor])
 		if doctor.save
-			session[:user_id] = doctor.id
 			session[:user_email] = doctor.email
 			redirect_to doctor, notice: "Doctor account created successfully!"
 		else
