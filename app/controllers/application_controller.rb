@@ -10,6 +10,7 @@ private
 
   helper_method :current_user, :logout_on_destroy
 
+  # TODO: Current_user use the cookies auth_token?
   def current_user
   	@current_user ||= find_user if session[:user_email]
   end
