@@ -3,7 +3,6 @@ class SessionsController < ApplicationController
 		user = find_patient(params) || find_doctor(params)
 		if user && user.authenticate(params[:password])
 			session[:user_email] = user.email
-			session[:user_id] = user.id
 			redirect_to user, notice: "Logged in successfully!"
 		else
 		redirect_to root_path, error: "Incorrect Information"
@@ -11,7 +10,6 @@ class SessionsController < ApplicationController
 	end
 
 	def destroy
-		session[:user_id] = nil
 		session[:user_email] = nil
 		redirect_to root_path
 	end
