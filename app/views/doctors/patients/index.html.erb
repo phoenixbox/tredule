@@ -1,2 +1,10 @@
-<h1>My Patients</h1>
-<%= link_to "Invite a Patient", "/" %>
+<h1><%= current_user.first_name %>'s Patients</h1>
+<h3>Invite a Patient</h3>
+<!-- TODO: Hit the right invite action of the doctors controller -->
+<div id="invite-patient-form">
+	<%= form_tag({controller: "doctor", action: "invite"}, method: "post" ) do %>
+	  <%= label_tag(:invite, "Patients Email:") %>
+	  <%= text_field_tag(:invite) %>
+	  <%= submit_tag("Invite") %>
+	<% end %>
+</div>

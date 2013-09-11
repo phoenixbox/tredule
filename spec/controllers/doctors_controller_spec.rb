@@ -64,6 +64,14 @@ describe DoctorsController do
 			end
 		end
 	end
+	describe "POST#invite" do
+		context "with a invitees email" do
+			xit "responds successfully" do
+				post :invite, patient_email: "patient@example.com"
+				expect(response).to respond_with(:success)
+			end
+		end
+	end
 	describe "PUT#update" do
 		before(:each) do
 			@doctor = FactoryGirl.create(:doctor, first_name: 'drake')

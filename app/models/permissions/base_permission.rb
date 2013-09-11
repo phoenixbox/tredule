@@ -9,7 +9,6 @@ module Permissions
 		end
 
 		def allow(controllers, actions)
-			# binding.pry
 			@allowed_actions ||= {}
 			Array(controllers).each do |controller|
 				Array(actions).each do |action|

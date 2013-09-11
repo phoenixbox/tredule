@@ -10,6 +10,11 @@ describe Doctor do
   end
 
   it { should have_many(:patients).through(:doctors_patients) }
+  xit { should have_many(:invites) }
+  # doctor model
+    # has_many :invites, :as => :invitable
+  # invite model
+    # belongs_to :invitable, :polymorphic => true
   it { should have_db_column(:auth_token) }
   it { should have_db_column(:password_reset_token) }
   it { should have_db_column(:password_reset_at) }
