@@ -8,6 +8,7 @@ describe Patient do
 	it { should have_db_column(:email) }
 	it { should have_db_column(:auth_token) }
 	it { should have_many(:doctors).through(:doctors_patients)}
+	it { should have_many(:invites) }
 
 	it 'subject should be valid' do
 		expect(subject).to be_valid
