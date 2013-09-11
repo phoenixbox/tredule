@@ -15,6 +15,7 @@ gem 'redis', "~> 3.0.3"
 gem 'sqlite3'
 gem 'sorcery'
 gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'state_machine'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

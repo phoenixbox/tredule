@@ -2,6 +2,7 @@ class Doctor < ActiveRecord::Base
 
   has_many :doctors_patients
   has_many :patients, :through => :doctors_patients
+  has_many :invites, :as => :inviteable
 
   attr_accessible :email,
   								:first_name,
