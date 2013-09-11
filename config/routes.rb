@@ -4,7 +4,17 @@ Railsplate::Application.routes.draw do
   root to: 'home#index'
 
   resources :patients
+
   resources :doctors
+  namespace :doctors do
+    # resources :patients, :only => [:index]
+    get ":id/patients" => "patients#index", as: :patients
+  end
+
+  # namespace :doctors do
+  #   resources :patients, :only => [:index]
+  # end
+
   resources :sessions
   resources :password_resets
   # The priority is based upon order of creation:

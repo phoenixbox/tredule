@@ -1,14 +1,14 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: rspec_development
+  database: tredule_redo_development
 
 test:
   adapter: postgresql
   encoding: unicode
-  database: rspec_test
+  database: tredule_redo_test
 
 production:
   adapter: postgresql
   encoding: unicode
-  database: rspec_production
+  database: tredule_redo_production
