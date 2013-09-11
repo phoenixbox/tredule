@@ -4,7 +4,7 @@ feature "doctor invites a patient by email:" do
 	let(:doctor){FactoryGirl.create(:doctor)}
 	let(:patient){FactoryGirl.create(:patient)}
 
-	xit "whom is already a Tredule member, to be the doctor's patient" do
+	it "whom is already a Tredule member, to be the doctor's patient" do
 		log_in(doctor)
 		visit doctor_path(doctor)
 		expect(page).to have_content("Logged in as:")
@@ -14,6 +14,7 @@ feature "doctor invites a patient by email:" do
 			fill_in :email, :with => patient.email
 			click_button "Invite Patient"
 		}
+		save_and_open_page
 		expect(page).to have_content("Patient Invited!")
 	end
 end
