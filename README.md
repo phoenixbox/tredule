@@ -1,3 +1,3 @@
-# Railsplate
+# Tredule
 
-Template rails app for easy project start. Configured with rspec & capybara for testing, PostgreSQL for database and a more fleshed out Gemfile.
+Tredule is a treatment schedule reminder application which helps patients keep on top of their prescribed daily medication consumption
