@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130911160231) do
+ActiveRecord::Schema.define(:version => 20130911201525) do
 
   create_table "doctors", :force => true do |t|
     t.string   "first_name"
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(:version => 20130911160231) do
   end
 
   create_table "invites", :force => true do |t|
-    t.string   "invited_email"
+    t.string   "recipient_email"
     t.integer  "inviteable_id"
     t.string   "inviteable_type"
     t.string   "state"

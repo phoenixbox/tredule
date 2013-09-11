@@ -6,9 +6,11 @@ Railsplate::Application.routes.draw do
   resources :doctors
   namespace :doctors do
     get ":id/patients" => "patients#index", as: :patients
+    get ":id/patients/new/:email" => "patients#new", as: :new_patient
   end
 
   resources :sessions
   resources :password_resets
   resources :invites, :only => [:create]
+  get 'invites/:id/switch/:email' => "invites#switch", as: :invites_switch
 end

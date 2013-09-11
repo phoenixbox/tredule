@@ -14,7 +14,6 @@ feature "doctor invites a patient by email:" do
 			fill_in :email, :with => patient.email
 			click_button "Invite Patient"
 		}
-		save_and_open_page
-		expect(page).to have_content("Patient Invited!")
+		expect(page).to have_content("Invite Sent!")
 	end
 end

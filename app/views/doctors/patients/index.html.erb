@@ -3,13 +3,7 @@
 <!-- TODO: Hit the right invite action of the doctors controller -->
 <div id="invite-patient-form">
 	<form name="input" action='/invites' method="post" >
-		<!-- Patient Name: <input type="text" name="patient-username"></br> -->
 		Email: <input type="text" name="email"></br>
 		<input type="submit" value="Invite Patient">
-	</form><!-- form#invite-doctor-email -->
+	</form><!-- form#invite-patient-form -->
 </div>
-	<%#= form_tag({controller: "invite", action: "create"}, method: "post" ) do %>
-	  <%#= label_tag(:invite, "Patients Email:") %>
-	  <%#= text_field_tag(:invite) %>
-	  <%#= submit_tag("Invite") %>
-	<%# end %>

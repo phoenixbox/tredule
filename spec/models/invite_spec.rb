@@ -1,5 +1,6 @@
 require 'spec_helper'
 
 describe Invite do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "changes the invite state to pending when it has been sent" do
+  end
 end

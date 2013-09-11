@@ -6,6 +6,7 @@ module Permissions
 			allow :patients, [:new, :create]
 			allow :doctors, [:new, :create]
 			allow :password_resets, [:new, :create]
+			allow :invites, [:switch]
 		end
 	end
 end

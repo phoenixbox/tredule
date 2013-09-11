@@ -23,4 +23,6 @@ describe DoctorMailer do
       mail.body.encoded.should match("Welcome to Tredule")
     end
   end
+  describe "patient invite" do
+  end
 end
