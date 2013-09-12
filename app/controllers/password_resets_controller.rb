@@ -1,4 +1,5 @@
 class PasswordResetsController < ApplicationController
+	# Guest functionality so no access to the current_user
   def new
   end
 	# TODO: Make dynamic across all user types

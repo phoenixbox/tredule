@@ -8,7 +8,6 @@ describe Permissions::DoctorPermission do
 		it "authorize home [index]" do
 			should authorize("home","index")
 		end
-
 		it "authorize doctors [show edit update destroy]" do
 			should authorize("doctors", "show")
 			should authorize("doctors", "edit")
@@ -28,6 +27,12 @@ describe Permissions::DoctorPermission do
 			should_not authorize("patients","edit")
 			should_not authorize("patients","update")
 			should_not authorize("patients","destroy")
+		end
+		it "authorize doctors/patients [index]" do
+			should authorize("doctors/patients","index")
+		end
+		it "authorize invites [create]" do
+			should authorize("invites", "create")
 		end
 	end
 end
