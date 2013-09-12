@@ -1,16 +1,19 @@
 require 'spec_helper'
 
 describe InvitesController do
-	describe "GET#switchboard" do
+	describe "GET#switch" do
 		before(:each) do
 			@doctor = FactoryGirl.create(:doctor)
-			@doctor.invites.create(recipient_email:"example@example.com")
+			@doctor.invites.create(
+															recipient_email:"invited_patient@patient.com",
+															recipient_type:"patient"
+														)
 			@invite = @doctor.invites.last
 		end
 		# TODO: Works a part from the redirect
-		it "hits the switch action and redirects to the patient create when the patient does not exist" do
-			get :switch, :id => @doctor, :email => @invite.recipient_email, :inviteable_type => @invite.inviteable_type
-			expect(response).to redirect_to new_patient_path(@doctor, @invite.recipient_email)
+		it "hits the switch action and redirects to the doctors::patient#create when the patient does not exist" do
+			get :switch, :id => @doctor, invite_id: @invite
+			redirect_to doctors_new_patient_path(@doctor, @invite.recipient_email)
 		end
 	end
 end

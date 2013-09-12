@@ -3,7 +3,7 @@ class Invite < ActiveRecord::Base
   								:inviteable_type,
   								:recipient_email,
   								:state,
-  								:invited_type
+  								:recipient_type
 
   belongs_to :inviteable, :polymorphic => true
   def send_invite

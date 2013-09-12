@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130912120153) do
+ActiveRecord::Schema.define(:version => 20130912144238) do
 
   create_table "doctors", :force => true do |t|
     t.string   "first_name"
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(:version => 20130912120153) do
     t.string   "state"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
-    t.string   "invited_type"
+    t.string   "recipient_type"
   end
 
   add_index "invites", ["inviteable_id", "inviteable_type"], :name => "index_invites_on_inviteable_id_and_inviteable_type"

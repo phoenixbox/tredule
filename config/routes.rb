@@ -12,5 +12,5 @@ Railsplate::Application.routes.draw do
   resources :sessions
   resources :password_resets
   resources :invites, :only => [:create]
-  get 'invites/:id/switch/:email' => "invites#switch", as: :invites_switch
+  get 'invites/:id/switch' => "invites#switch", as: :invites_switch
 end
