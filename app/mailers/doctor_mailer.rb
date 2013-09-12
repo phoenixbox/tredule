@@ -10,4 +10,10 @@ class DoctorMailer < ActionMailer::Base
     @doctor = doctor
     mail :to => doctor.email, :subject => "Signup Confirmation"
   end
+
+  def invitation(doctor, invite)
+    @doctor = doctor
+    @invite = invite
+    mail :to => invite.recipient_email, :subject => "Invitation to Tredule!"
+  end
 end

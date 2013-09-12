@@ -23,4 +23,17 @@ describe DoctorMailer do
       mail.body.encoded.should match("Welcome to Tredule")
     end
   end
+  describe "invitation" do
+    let(:doctor) {FactoryGirl.create(:doctor, :password_reset_token => "qwerty")}
+    let(:invite){Invite.create(recipient_email:"patient@patient.com")}
+    let(:mail) { DoctorMailer.invitation(doctor,invite) }
+
+    it "renders the headers and the accept invitation link" do
+      mail.subject.should eq("Invitation to Tredule!")
+      mail.to.should eq(["patient@patient.com"])
+      mail.from.should eq(["admin@tredule.com"])
+      mail.body.encoded.should match("Invitation to Tredule!")
+      mail.body.encoded.should match(invites_switch_path(doctor,invite))
+    end
+  end
 end

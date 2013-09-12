@@ -4,7 +4,7 @@ describe Doctor do
 	subject do
 		FactoryGirl.create(:doctor)
 	end
-  it "delivers email to doctor" do
+  it "delivers password reset email to doctor" do
     subject.send_password_reset
     expect(last_email.body.encoded).to include("Password Reset Request")
   end
