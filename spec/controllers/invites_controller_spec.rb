@@ -8,9 +8,10 @@ describe InvitesController do
 			@invite = @doctor.invites.last
 		end
 		# TODO: Works a part from the redirect
-		xit "hits the switch action" do
-			get :switch, :id => @doctor.id, :email => @invite.recipient_email
-			expect(response).to redirect_to invites_switch_path(@doctor, @invite.recipient_email)
+		it "hits the switch action and redirects to the patient create when the patient does not exist" do
+			get :switch, :id => @doctor, :email => @invite.recipient_email, :inviteable_type => @invite.inviteable_type
+			expect(response).to redirect_to new_patient_path(@doctor, @invite.recipient_email)
 		end
 	end
 end
+# set intended recipient type?

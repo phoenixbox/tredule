@@ -2,4 +2,6 @@ Invitation to Tredule!
 
 <%= @doctor.first_name %> would like you to invite you to Tredule. The complete treatment schedule app!
 
-<%#= link_to 'Connect', invites_switch_path(@doctor, @recipient_email) %>
+<%= link_to 'Connect', invites_switch_path(@doctor, @invite) %>
+<!-- pass the whole invite back so we have sender and recipient type -->
+<!-- NOTE: Controller test passes by param not by object -->

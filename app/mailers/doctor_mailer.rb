@@ -13,7 +13,7 @@ class DoctorMailer < ActionMailer::Base
 
   def invitation(doctor, invite)
     @doctor = doctor
-    @recipient_email = invite.recipient_email
+    @invite = invite
     mail :to => invite.recipient_email, :subject => "Invitation to Tredule"
   end
 end

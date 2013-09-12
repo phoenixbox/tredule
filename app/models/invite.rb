@@ -1,5 +1,10 @@
 class Invite < ActiveRecord::Base
-  attr_accessible :inviteable_id, :inviteable_type, :recipient_email, :state
+  attr_accessible :inviteable_id,
+  								:inviteable_type,
+  								:recipient_email,
+  								:state,
+  								:invited_type
+
   belongs_to :inviteable, :polymorphic => true
   def send_invite
   	sender = self.inviteable_type.constantize.find(self.inviteable_id)

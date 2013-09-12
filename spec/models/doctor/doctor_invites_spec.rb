@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Doctor do
-	let(:invite){Invite.create(recipient_email:"pateient@patient.com")}
+	let(:invite){Invite.create(recipient_email:"patient@patient.com")}
 	subject do
 		FactoryGirl.create(:doctor)
 	end
