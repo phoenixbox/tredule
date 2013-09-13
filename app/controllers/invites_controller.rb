@@ -14,19 +14,26 @@ class InvitesController < ApplicationController
 	end
 
 	def switch
-		invite = Invite.find(params[:invite_id])
-		recipient_class = invite.recipient_type.capitalize.constantize
-		@recipient_email = invite.recipient_email
-		if recipient_class.find_by_email(@recipient_email).nil?
-			sender_type = invite.inviteable_type.downcase.pluralize
-			sender_id = invite.inviteable_id
-			recipient_type = invite.recipient_type.pluralize
-			redirect_to "/#{sender_type}/#{sender_id}/#{recipient_type}/new/#{@recipient_email}"
+		invite = Invite.find(params[:id])
+		# TODO: Make sure invitation has a recipient type so cant just enter in an id - if recipient type is not ok then redirect_to root_url - duplication with create method so extract to its own method
+		recipient_class = invite.recipient_type.capitalize.singularize.constantize
+		recipient_email = invite.recipient_email
+		if recipient_class.find_by_email(recipient_email).nil?
+			# binding.pry
+			redirect_to invite_accept_and_register_path(invite)
+			# sender_type = invite.inviteable_type.downcase.pluralize
+			# sender_id = invite.inviteable_id
+			# redirect_to "/#{invite.recipient_type}/new"
+			# redirect_to "/#{sender_type}/#{sender_id}/#{invite.recipient_type}/new/#{invite.id}"
 		elsif
 			redirect_to new_session_path(params)
 		else
 			redirect_to root_path, notice: "Not authorized!"
 		end
+	end
+
+	def accept_and_register
+		binding.pry
 	end
 end
 # States Options
