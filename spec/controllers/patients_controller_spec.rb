@@ -7,7 +7,7 @@ describe PatientsController do
 			expect(response).to render_template(:new)
 		end
 
-		it 'assigns a new Patient to @patient', focus: true do
+		it 'assigns a new Patient to @patient' do
 			get :new
 			expect(assigns(:patient)).to be_a_new(Patient)
 		end
