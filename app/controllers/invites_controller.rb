@@ -15,16 +15,11 @@ class InvitesController < ApplicationController
 
 	def switch
 		invite = Invite.find(params[:id])
-		# TODO: Make sure invitation has a recipient type so cant just enter in an id - if recipient type is not ok then redirect_to root_url - duplication with create method so extract to its own method
+		# TODO: Make sure invitation has a recipient type so cant just enter in an id - if recipient type is not ok then redirect_to root_url - duplication with create method so extract to its own method - use on all actions?
 		recipient_class = invite.recipient_type.capitalize.singularize.constantize
 		recipient_email = invite.recipient_email
 		if recipient_class.find_by_email(recipient_email).nil?
-			# binding.pry
 			redirect_to invite_accept_and_register_path(invite)
-			# sender_type = invite.inviteable_type.downcase.pluralize
-			# sender_id = invite.inviteable_id
-			# redirect_to "/#{invite.recipient_type}/new"
-			# redirect_to "/#{sender_type}/#{sender_id}/#{invite.recipient_type}/new/#{invite.id}"
 		elsif
 			redirect_to new_session_path(params)
 		else
@@ -33,7 +28,26 @@ class InvitesController < ApplicationController
 	end
 
 	def accept_and_register
-		binding.pry
+		invite = Invite.find(params[:id])
+		@sender = invite.inviteable_type.constantize.find(invite.inviteable_id)
+
+		# invitation is a readonly value, make sure invite is valid
+		recipient_class = invite.recipient_type.capitalize.singularize.constantize
+		@new_user = recipient_class.new
+	end
+
+	def signup
+		invite = Invite.find(params[:id])
+		recipient_class = invite.recipient_type.capitalize.singularize.constantize
+		sender = invite.inviteable_type.constantize.find(invite.inviteable_id)
+		new_user = recipient_class.create(params[invite.recipient_type.singularize])
+		if new_user.save
+			sender.send(invite.recipient_type) << new_user
+			session[:user_email] = new_user.email
+			redirect_to new_user, notice: "New Account Successfully Created!"
+		else
+			render :accept_and_register, notice: "Error with account creation, please check your submitted details!"
+		end
 	end
 end
 # States Options

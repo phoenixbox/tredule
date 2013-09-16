@@ -13,5 +13,6 @@ Railsplate::Application.routes.draw do
   resources :password_resets
   resources :invites, :only => [:create, :new]
     get 'invites/:id/switch' => "invites#switch", as: :invites_switch
+    post 'invites/:id/signup' => "invites#signup", as: :invites_signup
     get 'invites/:id/accept-and-register' => "invites#accept_and_register", as: :invite_accept_and_register
 end

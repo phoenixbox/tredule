@@ -8,8 +8,16 @@ feature "doctor-patient invitation" do
 		it "can sign up via invite link" do
 			doctor.invites<<invite
 			visit invites_switch_path(invite)
-			save_and_open_page
 			expect(page).to have_content("Accept Invitation")
+			# within(:css, "form#invite-signup"){
+			# 	fill_in :first_name, :with => "new"
+			# 	fill_in :second_name, :with => "patient"
+			# 	fill_in :email, :with => invite.recipient_email
+			# 	fill_in :password, :with => "secret"
+			# 	fill_in :password_confirmation, :with => "secret"
+			# 	click_button "Sign-up!"
+			# }
+			# expect(page).to have_content("Account Successfully Created!")
 		end
 	end
 	describe "patient already exists" do
