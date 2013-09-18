@@ -3,7 +3,6 @@ require 'spec_helper'
 feature "doctor-patient invitation" do
 	describe "patient does not exist" do
 		let(:doctor){FactoryGirl.create(:doctor)}
-		let(:patient){FactoryGirl.create(:patient)}
     let(:invite){Invite.create(recipient_email:"patient@patient.com", recipient_type: "patients")}
 
 		it "can signup via a valid invite link" do
@@ -33,7 +32,7 @@ feature "doctor-patient invitation" do
 		let(:patient){FactoryGirl.create(:patient)}
 		let(:invite){Invite.create(recipient_email: patient.email, recipient_type: "patients")}
 
-		it "can sign-in and the association to the sender can be made" do
+		it "can log-in and the association to the sender can be made" do
 			doctor.invites<<invite
 			visit invites_switch_path(invite)
 			expect(page).to have_content("Log-In!")
