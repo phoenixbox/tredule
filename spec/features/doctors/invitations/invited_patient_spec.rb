@@ -23,7 +23,20 @@ feature "doctor-patient invitation" do
 		end
 	end
 	describe "patient already exists" do
+		let(:doctor){FactoryGirl.create(:doctor)}
+		let(:patient){FactoryGirl.create(:patient)}
+		let(:invite){Invite.create(recipient_email: patient.email, recipient_type: "patients")}
+
 		it "can sign-in and the association can to the inviter can made" do
+			doctor.invites<<invite
+			visit invites_switch_path(invite)
+			expect(page).to have_content("Log-In!")
+			within(:css, "form.login-form"){
+				fill_in :email, :with => patient.email
+				fill_in :password, :with => patient.password
+				click_button "Log-In!"
+			}
+			expect(page).to have_content("association to #{doctor.first_name} #{doctor.second_name} made!")
 		end
 	end
 end

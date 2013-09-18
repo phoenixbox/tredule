@@ -14,5 +14,7 @@ Railsplate::Application.routes.draw do
   resources :invites, :only => [:create, :new]
     get 'invites/:id/switch' => "invites#switch", as: :invites_switch
     post 'invites/:id/signup' => "invites#signup", as: :invites_signup
-    get 'invites/:id/accept-and-register' => "invites#accept_and_register", as: :invite_accept_and_register
+    post 'invites/:id/login-and-associate' => "invites#login_and_associate", as: :invites_login_and_associate
+    get 'invites/:id/sign_in' => "invites#new_session", as: :invites_new_session
+    get 'invites/:id/create-and-associate' => "invites#create_and_associate", as: :invite_create_and_associate
 end
