@@ -14,28 +14,28 @@ class InvitesController < ApplicationController
 	end
 
 	def switch
-		invite = Invite.find(params[:id])
-		# TODO: Make sure invitation has a recipient type so cant just enter in an id - if recipient type is not ok then redirect_to root_url - duplication with create method so extract to its own method - use on all actions?
-		# TODO check invite validity
-		recipient_class = invite.recipient_type.capitalize.singularize.constantize
-		recipient_email = invite.recipient_email
-		if recipient_class.find_by_email(recipient_email).nil?
-			# doesnt exist - then create
-			redirect_to invite_create_and_associate_path(invite)
-		elsif recipient_class.find_by_email(recipient_email)
-			# does exist - signin
-			redirect_to invites_new_session_path(invite)
-		else
-			# catch all redirect to home - need to combine to invite validity check - remove me
-			redirect_to root_path, notice: "Not authorized!"
+		begin
+			invite = Invite.find(params[:id])
+			recipient_class = invite.recipient_type.capitalize.singularize.constantize
+			recipient_email = invite.recipient_email
+			if recipient_class.find_by_email(recipient_email).nil?
+				redirect_to invite_create_and_associate_path(invite)
+			else recipient = recipient_class.find_by_email(recipient_email)
+				sender = invite.inviteable_type.constantize.find(invite.inviteable_id)
+				if sender.send(invite.recipient_type).include?(recipient)
+					redirect_to root_path, notice: "Invite already accepted, please Log-In!"
+				else
+					redirect_to invites_new_session_path(invite)
+				end
+			end
+		rescue ActiveRecord::RecordNotFound
+			redirect_to root_path, notice: "Invalid Invite!"
 		end
 	end
 
 	def create_and_associate
 		invite = Invite.find(params[:id])
 		@sender = invite.inviteable_type.constantize.find(invite.inviteable_id)
-
-		# invitation is a readonly value, make sure invite is valid
 		recipient_class = invite.recipient_type.capitalize.singularize.constantize
 		@new_user = recipient_class.new
 	end
@@ -55,8 +55,16 @@ class InvitesController < ApplicationController
 	end
 
 	def new_session
-		# TODO RESTART!! : how did pass the id in the last path?
-		# want to use this form to new_session and then make the association :)
+		invite = Invite.find(params[:id])
+		recipient_class = invite.recipient_type.capitalize.singularize.constantize
+		recipient_email = invite.recipient_email
+		recipient = recipient_class.find_by_email(recipient_email)
+
+		sender = invite.inviteable_type.constantize.find(invite.inviteable_id)
+
+		if sender.send(invite.recipient_type).include?(recipient)
+			redirect_to root_path, notice: "Invite already accepted, please Log-In!"
+		end
 	end
 
 	def login_and_associate
