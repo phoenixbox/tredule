@@ -30,6 +30,13 @@ class Patient < ActiveRecord::Base
 		self.first_name.capitalize! && self.second_name.capitalize!
 	end
 
+	def send_password_reset
+		generate_token(:password_reset_token)
+		self.password_reset_at = Time.zone.now
+		save!
+		PatientMailer.password_reset(self).deliver
+	end
+
 	def generate_token(column)
 		begin
 		 self[column] = SecureRandom.urlsafe_base64

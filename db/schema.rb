@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130912144238) do
+ActiveRecord::Schema.define(:version => 20130918185058) do
 
   create_table "doctors", :force => true do |t|
     t.string   "first_name"
@@ -48,16 +48,18 @@ ActiveRecord::Schema.define(:version => 20130912144238) do
   add_index "invites", ["inviteable_id", "inviteable_type"], :name => "index_invites_on_inviteable_id_and_inviteable_type"
 
   create_table "patients", :force => true do |t|
-    t.string "first_name"
-    t.string "second_name"
-    t.string "email"
-    t.string "mobile"
-    t.string "dob"
-    t.string "insurance_provider"
-    t.string "policy_number"
-    t.string "medical_card_number"
-    t.string "password_digest"
-    t.string "auth_token"
+    t.string   "first_name"
+    t.string   "second_name"
+    t.string   "email"
+    t.string   "mobile"
+    t.string   "dob"
+    t.string   "insurance_provider"
+    t.string   "policy_number"
+    t.string   "medical_card_number"
+    t.string   "password_digest"
+    t.string   "auth_token"
+    t.string   "password_reset_token"
+    t.datetime "password_reset_at"
   end
 
 end
