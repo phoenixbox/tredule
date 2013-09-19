@@ -10,11 +10,14 @@ Railsplate::Application.routes.draw do
   end
 
   resources :sessions
-  resources :password_resets
+
+  resources :password_resets#, :except => [:edit, :update]
+  # get 'password_resets/:token/edit/:type => "password_resets#update', as: :edit_password_resets
+
   resources :invites, :only => [:create, :new]
-    get 'invites/:id/switch' => "invites#switch", as: :invites_switch
-    post 'invites/:id/signup' => "invites#signup", as: :invites_signup
-    post 'invites/:id/login-and-associate' => "invites#login_and_associate", as: :invites_login_and_associate
-    get 'invites/:id/sign_in' => "invites#new_session", as: :invites_new_session
-    get 'invites/:id/create-and-associate' => "invites#create_and_associate", as: :invite_create_and_associate
+  get 'invites/:id/switch' => "invites#switch", as: :invites_switch
+  post 'invites/:id/signup' => "invites#signup", as: :invites_signup
+  post 'invites/:id/login-and-associate' => "invites#login_and_associate", as: :invites_login_and_associate
+  get 'invites/:id/sign_in' => "invites#new_session", as: :invites_new_session
+  get 'invites/:id/create-and-associate' => "invites#create_and_associate", as: :invite_create_and_associate
 end

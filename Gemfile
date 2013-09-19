@@ -38,6 +38,7 @@ group :development, :test do
   gem 'selenium-webdriver', '2.31.0'
   gem 'simplecov'
   gem 'shoulda-matchers'
+  gem 'timecop'
 end
 
 
