@@ -7,8 +7,8 @@ feature "patient resets their password and relogs in" do
 		visit edit_password_reset_path(patient.password_reset_token)
 		expect(page).to have_content("Reset Your Password")
 		within(:css, "form#password-reset"){
-			fill_in :patient_password, :with => patient.password
-			fill_in :patient_password_confirmation, :with => patient.password
+			fill_in :patient_password, :with => "newPassword"
+			fill_in :patient_password_confirmation, :with => "newPassword"
 			click_button "Update Password"
 		}
 		expect(page).to have_content("Password Reset!")
@@ -25,8 +25,8 @@ feature "patient resets their password and relogs in" do
 		visit edit_password_reset_path(patient.password_reset_token)
 		expect(page).to have_content("Reset Your Password")
 		within(:css, "form#password-reset"){
-			fill_in :patient_password, :with => patient.password
-			fill_in :patient_password_confirmation, :with => patient.password
+			fill_in :patient_password, :with => "newPassword"
+			fill_in :patient_password_confirmation, :with => "newPassword"
 			click_button "Update Password"
 		}
 		expect(page).to have_content("Password Reset Expired!")

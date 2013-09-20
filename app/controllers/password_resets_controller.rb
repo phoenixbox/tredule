@@ -16,7 +16,6 @@ class PasswordResetsController < ApplicationController
 
   def update
   	@user = find_by_user_token(params)
-  	binding.pry
   	if @user.password_reset_at < 2.hours.ago
   		redirect to new_password_reset_path, notice: "Password Reset Expired!"
   	elsif @user.update_attributes(params[@user.class.name.downcase])
