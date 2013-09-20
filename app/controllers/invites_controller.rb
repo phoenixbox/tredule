@@ -16,13 +16,11 @@ class InvitesController < ApplicationController
 	def switch
 		begin
 			invite = Invite.find(params[:id])
-			recipient_class = invite.recipient_type.capitalize.singularize.constantize
-			recipient_email = invite.recipient_email
-			if recipient_class.find_by_email(recipient_email).nil?
+			if invite.find_recipient.nil?
 				redirect_to invite_create_and_associate_path(invite)
-			else recipient = recipient_class.find_by_email(recipient_email)
-				sender = invite.inviteable_type.constantize.find(invite.inviteable_id)
-				if sender.send(invite.recipient_type).include?(recipient)
+			else recipient = invite.find_recipient
+				sender = invite.find_sender
+				if invite.already_associated?(sender, recipient)
 					redirect_to root_path, notice: "Invite already accepted, please Log-In!"
 				else
 					redirect_to invites_new_session_path(invite)
@@ -35,20 +33,18 @@ class InvitesController < ApplicationController
 
 	def create_and_associate
 		invite = Invite.find(params[:id])
-		@sender = invite.inviteable_type.constantize.find(invite.inviteable_id)
-		recipient_class = invite.recipient_type.capitalize.singularize.constantize
-		@new_user = recipient_class.new
+		@sender = invite.find_sender
+		@new_user = invite.instantiate_new_recipient
 	end
 
 	def signup
 		invite = Invite.find(params[:id])
-		recipient_class = invite.recipient_type.capitalize.singularize.constantize
-		sender = invite.inviteable_type.constantize.find(invite.inviteable_id)
-		new_user = recipient_class.create(params[invite.recipient_type.singularize])
-		if new_user.save
-			sender.send(invite.recipient_type) << new_user
-			session[:user_email] = new_user.email
-			redirect_to new_user, notice: "New Account Successfully Created!"
+		recipient = invite.create_recipient(params)
+		if recipient.save
+			sender = invite.find_sender
+			invite.associate(sender, recipient)
+			session[:user_email] = recipient.email
+			redirect_to recipient, notice: "New Account Successfully Created!"
 		else
 			render :create_and_associate, notice: "Error with account creation, please check your submitted details!"
 		end
@@ -56,25 +52,19 @@ class InvitesController < ApplicationController
 
 	def new_session
 		invite = Invite.find(params[:id])
-		recipient_class = invite.recipient_type.capitalize.singularize.constantize
-		recipient_email = invite.recipient_email
-		recipient = recipient_class.find_by_email(recipient_email)
-
-		sender = invite.inviteable_type.constantize.find(invite.inviteable_id)
-
-		if sender.send(invite.recipient_type).include?(recipient)
+		recipient = invite.find_recipient
+		sender = invite.find_sender
+		if invite.already_associated?(sender, recipient)
 			redirect_to root_path, notice: "Invite already accepted, please Log-In!"
 		end
 	end
 
 	def login_and_associate
 		invite = Invite.find(params[:id])
-		recipient_class = invite.recipient_type.capitalize.singularize.constantize
-		recipient_email = invite.recipient_email
-		recipient = recipient_class.find_by_email(recipient_email)
+		recipient = invite.find_recipient
 		if recipient && recipient.authenticate(params[:password])
-			sender = invite.inviteable_type.constantize.find(invite.inviteable_id)
-			sender.send(invite.recipient_type) << recipient
+			sender = invite.find_sender
+			invite.associate(sender, recipient)
 			session[:user_email] = recipient.email
 			redirect_to recipient, notice: "Logged in successfully!, association to #{sender.first_name} #{sender.second_name} made!"
 		else

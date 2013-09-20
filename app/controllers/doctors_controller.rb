@@ -30,9 +30,4 @@ class DoctorsController < ApplicationController
 		logout_on_destroy
 		redirect_to root_path, notice: "Doctor account successfully deleted!"
 	end
-
-private
-	def invite
-		binding.pry
-	end
 end

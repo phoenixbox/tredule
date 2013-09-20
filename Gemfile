@@ -36,7 +36,6 @@ group :development, :test do
   gem 'reek'
   gem 'rspec-rails'
   gem 'selenium-webdriver', '2.31.0'
-  gem 'simplecov'
   gem 'shoulda-matchers'
   gem 'timecop'
 end
