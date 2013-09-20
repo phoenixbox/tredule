@@ -38,6 +38,11 @@ group :development, :test do
   gem 'selenium-webdriver', '2.31.0'
   gem 'shoulda-matchers'
   gem 'timecop'
+  gem 'jasmine'
+  gem 'jasminerice'
+  gem 'jasmine-jquery-rails'
+  gem 'launchy'
+  gem 'guard-jasmine'
 end
 
 
