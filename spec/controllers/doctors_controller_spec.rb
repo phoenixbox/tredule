@@ -6,7 +6,6 @@ describe DoctorsController do
 			get :new
 			expect(response).to render_template(:new)
 		end
-
 		it "assigns a new Doctor to @doctor" do
 			get :new
 			expect(assigns(:doctor)).to be_a_new(Doctor)
@@ -64,14 +63,6 @@ describe DoctorsController do
 			end
 		end
 	end
-	describe "POST#invite" do
-		context "with a invitees email" do
-			xit "responds successfully" do
-				post :invite, patient_email: "patient@example.com"
-				expect(response).to respond_with(:success)
-			end
-		end
-	end
 	describe "PUT#update" do
 		before(:each) do
 			@doctor = FactoryGirl.create(:doctor, first_name: 'drake')
@@ -90,7 +81,16 @@ describe DoctorsController do
 			end
 		end
 		context "with invalid attributes" do
-			# TODO
+			it "does not update the doctor" do
+				put :update, id: @doctor, doctor: {first_name: ""}
+				@doctor.reload
+				expect(@doctor.first_name).to eq "Drake"
+			end
+			it "redirects to the edit path" do
+				put :update, id: @doctor, doctor: {first_name: ""}
+				@doctor.reload
+				expect(response).to render_template :edit
+			end
 		end
 	end
 	describe "DELETE#destroy" do
