@@ -5,8 +5,8 @@ module Permissions
 			allow :sessions, [:create, :destroy]
 			allow :patients, [:new, :create]
 			allow :doctors, [:new, :create]
-			allow :password_resets, [:new, :create]
-			allow :invites, [:switch, :signup, :accept_and_register]
+			allow :password_resets, [:new, :create, :edit, :update]
+			allow :invites, [:switch, :signup, :new_session, :create_and_associate, :login_and_associate]
 		end
 	end
 end
